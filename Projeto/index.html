@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<!--
+    Utilização do: notion.so - anotação de coisas feitas nas aulas;
+-->
+
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Casa Criativa</title>
+
+    <link rel="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,900&display=swap" href="stylesheet">
+    <link rel="stylesheet" href="style.css"> <!-- rel= relação; href = onde esta o stylesheet; -->
+
+
+</head>
+
+<body>
+
+    <div id="container">
+        <!-- Tag/ Caixa que não tem muito significado semantico, ajuda quando não tem como colocar um significado  -->
+
+        <section id="intro">
+            <!-- Id não pode repetir, traz desgate; Colocar id escrevendo a tag e #. Ex> div#container-->
+
+            <header>
+                <!-- Cabeçalho-->
+
+                <img src="logo.png" alt="Imagem da Logomarca">
+
+            </header>
+
+            <main>
+
+                <p>
+                    Ficar em casa em períodos longos, não deve ser nada fácil.
+                </p>
+                <p>
+                    Por isso, iremos catalogar ideias, <strong>brincadeiras. jogos, filmes,
+                        livros, cursos, dicas</strong> e tudo que for necessário para tornar
+                    esse momoneto mais interessante.
+                </p>
+                <p>
+                    Comece clicando em ver ideias para ver as
+                    ideias cadastradas e contribua adicioando a sua ideia
+                </p>
+
+            </main>
+
+            <section id="buttons">
+
+                <button>+ Adicionar Ideia</button>
+                <button class="fat"> Ver Ideias</button>
+
+            </section>
+
+            <footer>
+                <!-- <p id="footer"> foi trocado pela tag footer -->
+
+                Com ❤ <a href="https://github.com/natanbalthazar">NatanAndrade</a>
+
+            </footer>
+
+
+        </section>
+
+        <section id="last-ideias">
+            <div class="ideia">
+                <!-- Coloca ponto dps para criar como classe; ex> div.ideia - faz como classe pq vai repetir para cada ideia-->
+                <img src="https://image.flaticon.com/icons/svg/2851/2851507.svg" alt="Imagem de Curso de Programação">
+
+                <div class="content">
+
+                    <h3>Cusos de Programação</h3> <!-- Outra tag para cabeçalho-->
+                    <p>Estudo</p>
+                    <div class="description">
+                        <!-- escrver lorem, o emit - inteligencia do vs code - escreve um texto-->
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, quam? Iure corporis atque
+                        officiis exercitationem eos enim, eum ducimus repellat quasi dicta. Esse minus iure quos
+                        consequuntur ea, nostrum debitis?
+                    </div>
+                    <div>
+                        <a href="#">Ir para a Ideia</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="ideia">
+                <!-- Coloca ponto dps para criar como classe; ex> div.ideia - faz como classe pq vai repetir para cada ideia-->
+                <img src="https://image.flaticon.com/icons/svg/181/181017.svg" alt="Imagens de Exercicios">
+
+                <div class="content">
+
+                    <h3>Exercicios</h3> <!-- Outra tag para cabeçalho-->
+                    <p>Saude</p>
+                    <div class="description">
+                        <!-- escrver lorem, o emit - inteligencia do vs code - escreve um texto-->
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, quam? Iure corporis atque
+                        officiis exercitationem eos enim, eum ducimus repellat quasi dicta. Esse minus iure quos
+                        consequuntur ea, nostrum debitis?
+                    </div>
+                    <div>
+                        <a href="#">Ir para a Ideia</a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="ideia">
+                <!-- Coloca ponto dps para criar como classe; ex> div.ideia - faz como classe pq vai repetir para cada ideia-->
+                <img src="https://image.flaticon.com/icons/svg/1466/1466246.svg" alt="Imagens de Meditação">
+
+                <div class="content">
+
+                    <h3>Meditação</h3> <!-- Outra tag para cabeçalho-->
+                    <p>Mentalidade</p>
+                    <div class="description">
+                        <!-- escrver lorem, o emit - inteligencia do vs code - escreve um texto-->
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, quam? Iure corporis atque
+                        officiis exercitationem eos enim, eum ducimus repellat quasi dicta. Esse minus iure quos
+                        consequuntur ea, nostrum debitis?
+                    </div>
+                    <div>
+                        <a href="#">Ir para a Ideia</a>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </section>
+
+
+    </div>
+
+    <!-- Modal -->
+
+    <div id="modal">
+        <div class="content">
+
+            <h1> Nova Ideia</h1>
+
+            <form action="">
+
+                <div class="input-wrapper">
+                    <label for="title">Título da ideia</label>
+                    <input type="text" name="title">
+                </div>
+
+                <div class="input-wrapper">
+                    <label for="category">Categoria</label>
+                    <input type="text" name="category">
+
+                </div>
+
+                <div class="input-wrapper">
+                    <label for="image">Link da Imagem</label>
+                    <input type="url" name="image">
+
+                </div>
+
+                <div class="input-wrapper">
+                    <label for="description">Digite uma descrição para essa ideia</label>
+                    <textarea name="description" cols="30" rows="10"></textarea>
+
+                </div>
+
+                <div class="input-wrapper">
+                    <label for="link">Link da Ideia</label>
+                    <input type="url" name="link">
+
+                </div>
+
+                <button>Salvar</button>
+
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+
+    <script src="scripts.js"></script>
+
+</body>
+
+</html>

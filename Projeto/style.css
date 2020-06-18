@@ -1,0 +1,271 @@
+/*
+CSS
+
+Cascading StyleSheet
+
+é possivel linkar uma tag com um estilo, no CSS é chamado de seletor - referencia a uma tag ou elemento
+HTML - Sintaxe CSS: 
+body {
+    propriedade:valor; - Cada propriedade vai ter seu valor especifico;
+}
+Backgroung - Fundo (none - tira o fundo); Color - Cor de texto; - Ambos se manter em cima da pra mudar o estilo de como mudar a cor;
+border - configurações da borda (none=nenhuma);
+text-align - alinhamento do texto;
+font-size - tamanho da fonte;
+font-weight - serve tbm para deixar a fonte em negrito;
+text-decoration: utilizado para linha debaixo do texto - none - sem nenhuma linha;
+.alguma coisa - serve para acessar todas as classes do que foi mencionado;
+#alguma coisa - serve para chamar o elemento mencionado;
+se eu chamo sem nenhuma dessas duas, eu pego o html inteiro, ou seja, o arquivo inteiro;
+
+---
+Aula 2:
+
+codigo identado -> codigo organizado;
+
+Tudo é BOX.
+
+BOX > box ou textos ou imagens
+Conteudo da Caixa
+
+Conceito de Box moddeling ou Modelo de caixa no CSS:
+  Margin - Espaçamento;
+  Border - Bordas ou limites da caixa;
+  Padding - Preenchimento;
+  Conteudo da caixa - Parte Central;
+
+  Toda Caixa tem sua Largura, Altura
+  Padrão do CSS e uma coisa embaixo da outra com exceção de alguns elementos que receberão outro tipo de display/apresentação;
+    Diplay:
+     Block - Ocupa toda a linha e faz uma quebra de linha - exemplo p!;
+
+Box Model: - Tudo dentro do CSS
+ Largura
+ Altura
+ Contetudo da Caixa:
+
+  Espaçamentos
+  Bordas
+  Preenchimento
+
+  Posicionamentos
+
+*/
+
+body{
+    background: #e5e5e5 ;
+    color: #25282b;
+
+    font-family: 'Montserrat', sans-serif;
+
+    margin: 0;
+
+}
+
+.hide{
+    display: none;
+
+}
+
+a{
+    color: #ff5e84;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+p, .description{
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.1px;
+
+}
+
+
+#container{
+    width:80%;
+    max-width: 980px;
+
+    margin: 40px auto;
+    
+    display: flex;
+
+}
+
+#intro{
+width: 300px;
+margin-right: 20px;
+
+}
+
+main{
+margin: 32px 0;
+}
+
+#buttons{
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 32px;
+}
+
+
+button {
+    background: none;     
+    color: #ff5e84;
+
+    border: none;
+
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 18px;
+    letter-spacing: 0.2px;
+
+    cursor: pointer;
+
+    outline: none;
+
+}
+button:hover{
+    text-decoration: underline;
+}
+
+button.fat{
+    background: #ff5e84;
+    color:white;
+    width: 150px;
+    height: 40px;
+    border-radius: 6px;
+    box-shadow: 0px 8px 16px #ff5e8432;
+
+}
+button.fat:hover{
+    text-decoration: none;
+
+}
+
+footer{
+    text-align: center;
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 0.2px;
+
+    color: #777;
+}
+
+footer a{
+    opacity: 0.;
+}
+
+.ideia{
+    display: flex;
+
+    background-color: #ffff;
+    box-shadow: 0px 4px 16px -8px rgba(1, 1, 1, 0.1);
+    border-radius: 8px;
+    
+    padding: 32px;
+    margin-bottom: 32px;
+}
+
+.ideia img{
+    width: 60px;
+    height: 60px;
+
+    margin-right: 32px;
+
+}
+
+.ideia h3 {
+    margin: 0;
+}
+
+.ideia p{
+    margin: 8px 0;
+    color: #777;
+}
+
+.ideia .description{
+    margin: 16px 0;
+}
+
+
+/* modal  */
+
+#modal{
+    background: #ff5e84;
+
+    position: absolute;
+    top: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+}
+
+
+#modal .content{
+    margin-top: 128px;
+
+    color: white;
+}
+
+#modal .content h1{
+    text-align: center;
+
+    text-transform: uppercase;
+}
+
+#modal form{
+    width: 80%;
+    max-width: 800px;
+
+    margin:0 auto;
+}
+
+.input-wrapper{
+    margin: 12px;
+}
+
+form input, 
+form textarea{
+    width: 100%;
+
+    padding: 12px;
+    
+    border-radius: 6px;
+    border: 1px solid rgba(141, 25, 52, 0.5);
+
+    outline: none;
+    
+    font-size: 16px;
+}
+
+form label{
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: 0.8px;
+}
+
+form button{
+    background: white;
+
+    width: 150px;
+    height: 40px;
+    border-radius: 6px;
+    cursor: pointer;
+
+}
+
+form button:hover{
+    background-color: #0984e3;
+    color: white;
+
+    text-decoration: none;
+}
