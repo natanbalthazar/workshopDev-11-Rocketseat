@@ -21,13 +21,11 @@
 <body>
 
     <div id="container">
-        <!-- Tag/ Caixa que não tem muito significado semantico, ajuda quando não tem como colocar um significado  -->
 
         <section id="intro">
-            <!-- Id não pode repetir, traz desgate; Colocar id escrevendo a tag e #. Ex> div#container-->
 
             <header>
-                <!-- Cabeçalho-->
+                
 
                 <img src="logo.png" alt="Imagem da Logomarca">
 
@@ -52,13 +50,12 @@
 
             <section id="buttons">
 
-                <button>+ Adicionar Ideia</button>
+                <button onclick="onOff()">+ Adicionar Ideia</button>
                 <button class="fat"> Ver Ideias</button>
 
             </section>
 
             <footer>
-                <!-- <p id="footer"> foi trocado pela tag footer -->
 
                 Com ❤ <a href="https://github.com/natanbalthazar">NatanAndrade</a>
 
@@ -69,15 +66,16 @@
 
         <section id="last-ideias">
             <div class="ideia">
-                <!-- Coloca ponto dps para criar como classe; ex> div.ideia - faz como classe pq vai repetir para cada ideia-->
-                <img src="https://image.flaticon.com/icons/svg/2851/2851507.svg" alt="Imagem de Curso de Programação">
+                
+                <img 
+                    src="https://image.flaticon.com/icons/svg/2729/2729007.svg" 
+                    alt="Imagem de Curso de Programação">
 
                 <div class="content">
 
-                    <h3>Cusos de Programação</h3> <!-- Outra tag para cabeçalho-->
+                    <h3>Cusos de Programação</h3> 
                     <p>Estudo</p>
                     <div class="description">
-                        <!-- escrver lorem, o emit - inteligencia do vs code - escreve um texto-->
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, quam? Iure corporis atque
                         officiis exercitationem eos enim, eum ducimus repellat quasi dicta. Esse minus iure quos
                         consequuntur ea, nostrum debitis?
@@ -90,15 +88,16 @@
             </div>
 
             <div class="ideia">
-                <!-- Coloca ponto dps para criar como classe; ex> div.ideia - faz como classe pq vai repetir para cada ideia-->
-                <img src="https://image.flaticon.com/icons/svg/181/181017.svg" alt="Imagens de Exercicios">
+                
+                <img 
+                    src="https://image.flaticon.com/icons/svg/2729/2729005.svg" 
+                    alt="Imagens de Exercicios">
 
                 <div class="content">
 
-                    <h3>Exercicios</h3> <!-- Outra tag para cabeçalho-->
+                    <h3>Exercicios</h3> 
                     <p>Saude</p>
                     <div class="description">
-                        <!-- escrver lorem, o emit - inteligencia do vs code - escreve um texto-->
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, quam? Iure corporis atque
                         officiis exercitationem eos enim, eum ducimus repellat quasi dicta. Esse minus iure quos
                         consequuntur ea, nostrum debitis?
@@ -111,15 +110,16 @@
             </div>
 
             <div class="ideia">
-                <!-- Coloca ponto dps para criar como classe; ex> div.ideia - faz como classe pq vai repetir para cada ideia-->
-                <img src="https://image.flaticon.com/icons/svg/1466/1466246.svg" alt="Imagens de Meditação">
+                
+                <img 
+                    src="https://image.flaticon.com/icons/svg/2729/2729027.svg" 
+                    alt="Imagens de Meditação">
 
                 <div class="content">
 
-                    <h3>Meditação</h3> <!-- Outra tag para cabeçalho-->
+                    <h3>Meditação</h3> 
                     <p>Mentalidade</p>
                     <div class="description">
-                        <!-- escrver lorem, o emit - inteligencia do vs code - escreve um texto-->
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, quam? Iure corporis atque
                         officiis exercitationem eos enim, eum ducimus repellat quasi dicta. Esse minus iure quos
                         consequuntur ea, nostrum debitis?
@@ -140,7 +140,7 @@
 
     <!-- Modal -->
 
-    <div id="modal">
+    <div id="modal" class="hide">
         <div class="content">
 
             <h1> Nova Ideia</h1>
@@ -176,6 +176,7 @@
 
                 </div>
 
+                <a href="#" onclick="onOff()">Voltar</a>
                 <button>Salvar</button>
 
 
