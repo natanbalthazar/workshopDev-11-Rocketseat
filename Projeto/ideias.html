@@ -1,67 +1,30 @@
 <!DOCTYPE html>
-
-<!--
-    Utilização do: notion.so - anotação de coisas feitas nas aulas;
--->
-
-<html>
-
+<html lang="pt-br">
 <head>
-
     <meta charset="UTF-8">
-
-    <title>Casa Criativa</title>
+    <title>Ideias - Casa Criativa</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,900&display=swap">
     <link rel="stylesheet" href="style.css">
-
-
 </head>
+<body id="page-ideas">
 
-<body>
-
-    <div id="container">
-
-        <section id="intro">
-
-            <header>
-                <a href="index.html">
-                    <img src="logo.png" alt="Imagem da Logomarca">
-                </a>
-            </header>
-
-            <main>
-
-                <p>
-                    Ficar em casa em períodos longos, não deve ser nada fácil.
-                </p>
-                <p>
-                    Por isso, iremos catalogar ideias, <strong>brincadeiras. jogos, filmes,
-                        livros, cursos, dicas</strong> e tudo que for necessário para tornar
-                    esse momoneto mais interessante.
-                </p>
-                <p>
-                    Comece clicando em ver ideias para ver as
-                    ideias cadastradas e contribua adicioando a sua ideia
-                </p>
-
-            </main>
-
-            <section id="buttons">
-
-                <button onclick="onOff()">+ Adicionar Ideia</button>
-                <a href="ideias.html" class="button"> Ver Ideias</a>
-
-            </section>
-
-            <footer>
-                Com ❤ <a href="https://github.com/natanbalthazar" target="_blank">NatanAndrade</a>
-            </footer>
-
-
-        </section>
-
-        <section id="last-ideias">
+<div id="container">
+    <header>
+        <a href="index.html">
+            <img src="logo.png" alt="Imagem da Logomarca">
+        </a>
+        <nav>
+            <li><a href="index.html">Início</a></li>
+            <li><a class="button" href="#" onclick="onOff()">Nova Ideia</a></li>
+        </nav>
+    </header>
+    <section id="title">
+        <p>em exibição</p>
+        <h1>Ideias</h1>
+    </section>
+    <main>
+        <section id="ideas">
             <div class="ideia">
                 
                 <img 
@@ -128,12 +91,36 @@
                 </div>
             </div>
 
+            <div class="ideia">
+                
+                <img 
+                    src="https://image.flaticon.com/icons/svg/2729/2729032.svg" 
+                    alt="Imagens de Karaokê">
+
+                <div class="content">
+
+                    <h3>Karaokê</h3> 
+                    <p>Diversão em Família</p>
+                    <div class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, quam? Iure corporis atque
+                        officiis exercitationem eos enim, eum ducimus repellat quasi dicta. Esse minus iure quos
+                        consequuntur ea, nostrum debitis?
+                    </div>
+                    <div>
+                        <a href="#">Ir para a Ideia</a>
+                    </div>
+
+                </div>
+            </div>
+
 
 
         </section>
-
-
-    </div>
+    </main>
+    <footer>
+        Com ❤ <a href="https://github.com/natanbalthazar" target="_blank">NatanAndrade</a>
+    </footer>
+</div>
 
     <!-- Modal -->
 
@@ -186,7 +173,5 @@
 
 
     <script src="scripts.js"></script>
-
 </body>
-
 </html>
