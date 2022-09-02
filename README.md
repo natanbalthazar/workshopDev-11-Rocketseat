@@ -1,5 +1,3 @@
-# WorkshopDev-11
-
 <h1 align="center">
     <img alt="Casa Criativa" title="Casa Criativa" src="projeto/public/logo.png" />
 </h1>
