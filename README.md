@@ -11,10 +11,6 @@
   <a href="#memo-licença">Licença</a>
 </p>
 
-<p align="center">
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-ff5d86">
-</p>
-
 <br/>
 
 ## 💻 Projeto
