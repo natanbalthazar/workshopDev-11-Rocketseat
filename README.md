@@ -37,10 +37,13 @@ Para que a aplicação funcione corretamente, é necessário ter os seguintes pr
 ```bash
 # Primeiramente, clone o repositório
 git clone https://github.com/natanbalthazar/WorkshopDev-11-Rocketseat.git
+
 # Acesse a pasta da aplicação
 cd projeto/
+
 # Instale as dependências
 npm install
+
 # Rode a aplicação
 npm run dev
 ```
