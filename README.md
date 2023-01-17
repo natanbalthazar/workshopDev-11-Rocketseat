@@ -3,9 +3,9 @@
 </h1>
 
 <p align="center">
-  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-getting-started">Getting Started</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#wrench-instalação-e-uso">Instalação e uso</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#memo-licença">Licença</a>
 </p>
 
@@ -15,6 +15,9 @@
 
 Aplicação realizada durante a Semana Omnistack 11 da Rocketseat. A **Casa Criativa** é uma aplicação onde as pessoas podem sugerir novas idéias de atividades que serão listadas em um quadro fácil de ser utilizado.
 
+<div align="center">
+<img alt="Tela Principal" title="Tela Principal" src="https://user-images.githubusercontent.com/62712246/212782248-d8d9a425-80fe-43f4-b13f-00136afd1ac2.png" height="350px" />
+</div>
 
 ## 🚀 Tecnologias
 
@@ -26,7 +29,7 @@ O projeto foi desenvolvido com as seguintes tecnologias:
 - [SQLite3](https://www.sqlite.org/index.html)
 
 
-## ▶ Getting Started
+## :wrench: Instalação e uso
 ### Requisitos:
 Para que a aplicação funcione corretamente, é necessário ter os seguintes programas:
 - [Git](https://git-scm.com),
@@ -48,7 +51,7 @@ npm install
 npm run dev
 ```
 
-- Após abrir, é possível acessar a aplicação no seu navegador, colocando o seguinte link: localhost:3000
+- Após rodar a aplicação, é possível acessar no seu navegador, colocando a seguinte url: ```localhost:3000```
 
 ## :memo: Licença
 
