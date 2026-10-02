@@ -1,3 +1,8 @@
+{#
+  Card de ideia reaproveitado por index.html (2 últimas) e ideias.html (todas) via {% include %}.
+  Usa a variável `ideas` passada por res.render() em server.js.
+  `{{ }}` escapa HTML automaticamente: um título "<b>oi</b>" aparece como texto.
+#}
 {% for idea in ideas %}
 
 <div class="ideia">

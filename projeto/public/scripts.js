@@ -1,43 +1,17 @@
-function onOff(){
-    document
-        .querySelector("#modal")
-        .classList
-        .toggle("hide")
+// Roda no NAVEGADOR (não no Node): carregado por views/layout.html.
 
-    document
-        .querySelector("body")
-        .classList
-        .toggle("hideScroll")
+/**
+ * Abre/fecha o modal "Nova Ideia". Chamada pelos `onclick="onOff()"` nas views.
+ * `toggle` adiciona a classe se não existe e remove se existe, então a mesma função abre e fecha.
+ *
+ * - hide        -> esconde o modal (style.css)
+ * - addScroll   -> permite rolar dentro do modal
+ * - hideScroll  -> trava a rolagem da página de fundo enquanto o modal está aberto
+ */
+function onOff() {
+    const modal = document.querySelector("#modal")
 
-    document
-        .querySelector("#modal")
-        .classList
-        .toggle("addScroll")
-}
-
-function checkFields(event) {
-
-    const valuesToCheck = [
-        "title",
-        "category",
-        "image",
-        "description",
-        "link"
-    ]
-
-    const isEmpty = valuesToCheck.find(function(value){
-        
-        const checkIfIsString= typeof event.target[value].value === "string"
-        const checkIfIsEmpty = !event.target[value].value.trim()
-        
-        if(checkIfIsString && checkIfIsEmpty ){
-            return true
-        }
-    })
-    
-    if(isEmpty) {
-        event.preventDefault()
-        alert("Por favor, preencha todos os campos!")
-    }
-    
+    modal.classList.toggle("hide")
+    modal.classList.toggle("addScroll")
+    document.body.classList.toggle("hideScroll")
 }

@@ -1,58 +1,55 @@
-const sqlite3= require('sqlite3').verbose()
-const db = new sqlite3.Database('./projeto.db')
+// `.verbose()` deixa os erros do SQLite com stack trace mais detalhado (ajuda a debugar).
+const sqlite3 = require('sqlite3').verbose()
+const path = require('path')
 
-db.serialize(function(){
+// Abre o arquivo do banco (ou cria um vazio, se não existir).
+// `__dirname` é a pasta deste arquivo: sem ele, rodar `node projeto/server.js` a partir da raiz
+// do repositório criaria um projeto.db novo e vazio na raiz, e as ideias "sumiriam".
+const db = new sqlite3.Database(path.join(__dirname, 'projeto.db'))
 
-    db.run(`
-        CREATE TABLE IF NOT EXISTS ideas(
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            image TEXT,
-            title TEXT,
-            category TEXT,
-            description TEXT,
-            link TEXT
-        );
-    `)
+// `IF NOT EXISTS`: roda em toda inicialização sem erro e sem apagar dados.
+// Sem ele, a 2ª vez que o servidor subisse daria "table ideas already exists".
+db.run(`
+    CREATE TABLE IF NOT EXISTS ideas(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        image TEXT,
+        title TEXT,
+        category TEXT,
+        description TEXT,
+        link TEXT
+    );
+`)
 
-    // const query = `
-    // INSERT INTO ideas(
-    //     image,
-    //     title,
-    //     category,
-    //     description,
-    //     link
-    // ) VALUES (?,?,?,?,?);
-    // `
- 
-    // const values = [
-    //     "https://image.flaticon.com/icons/svg/2729/2729007.svg",
-    //     "Cusos de Programação",
-    //     "Estudo",
-    //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, quam?",
-    //     "http://rocketseat.com.br"
-    // ]
-
-
-    // db.run(query, values, function(err) {
-    //     if (err) return console.log(err)
-
-    //     console.log(this)
-    // })
-
-    // db.run(` DELETE FROM ideas WHERE id= ?`, [1], function(err){
-    //     if (err) return console.log(err)
-
-    //     console.log("DELETEI", this)
-
-    // })
-
-    // db.all(`SELECT * FROM ideas`, function(err, rows){
-    //     if (err) return console.log(err)
-
-    //     console.log(rows)
-    // })
-
-
-})
+/*
+ * Exemplos para estudar a API do sqlite3. Cole em um arquivo de teste e rode com `node`;
+ * não descomente aqui, senão rodam a cada vez que o servidor sobe.
+ *
+ * db.run  -> executa sem retornar linhas (INSERT, UPDATE, DELETE)
+ * db.all  -> retorna TODAS as linhas em um array
+ * db.get  -> retorna só a PRIMEIRA linha (ou undefined)
+ *
+ * // Inserir: `this.lastID` é o id gerado. Use `function`, não arrow function,
+ * // porque o sqlite3 passa os dados pelo `this`.
+ * db.run(`INSERT INTO ideas(title) VALUES (?)`, ["Minha ideia"], function(err) {
+ *     if (err) return console.log(err)
+ *     console.log(this.lastID)
+ * })
+ *
+ * // Listar
+ * db.all(`SELECT * FROM ideas`, function(err, rows) {
+ *     console.log(rows) // [{ id: 1, title: "...", ... }]
+ * })
+ *
+ * // Deletar: `this.changes` = quantas linhas foram apagadas (0 se o id não existe).
+ * db.run(`DELETE FROM ideas WHERE id = ?`, [1], function(err) {
+ *     console.log(this.changes)
+ * })
+ *
+ * EVITE: concatenar valores no SQL, ex. `DELETE FROM ideas WHERE id = ${id}`.
+ * Se `id` vier do usuário como "1 OR 1=1", apaga a tabela inteira (SQL injection).
+ * Use sempre `?` + array de valores.
+ *
+ * Os callbacks são assíncronos: o código depois de `db.all(...)` roda ANTES de `rows` chegar.
+ */
 
 module.exports = db

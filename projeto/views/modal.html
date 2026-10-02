@@ -1,38 +1,44 @@
-<!-- Modal -->
+{#
+  Modal "Nova Ideia": incluído em todas as páginas por layout.html, começa escondido (classe "hide").
+  - `name` de cada campo vira a chave em req.body no servidor (server.js: FIELDS).
+  - `for` do label = `id` do campo: clicar no texto foca o input. Prefixo "idea-" para não
+    colidir com outros ids da página (ex.: <section id="title"> em ideias.html).
+  - `required` e `type="url"`: o navegador valida antes de enviar. O servidor valida de novo.
+#}
 
 <div id="modal" class="hide">
     <div class="content">
 
         <h1> Nova Ideia</h1>
 
-        <form action="/" method="POST" onsubmit="return checkFields(event)">
+        <form action="/" method="POST">
 
             <div class="input-wrapper">
-                <label for="title">Título da ideia</label>
-                <input type="text" name="title">
+                <label for="idea-title">Título da ideia</label>
+                <input type="text" id="idea-title" name="title" required>
             </div>
 
             <div class="input-wrapper">
-                <label for="category">Categoria</label>
-                <input type="text" name="category">
-
-            </div>
-
-            <div class="input-wrapper">
-                <label for="image">Link da Imagem</label>
-                <input type="url" name="image">
+                <label for="idea-category">Categoria</label>
+                <input type="text" id="idea-category" name="category" required>
 
             </div>
 
             <div class="input-wrapper">
-                <label for="description">Digite uma descrição para essa ideia</label>
-                <textarea name="description" cols="30" rows="10"></textarea>
+                <label for="idea-image">Link da Imagem</label>
+                <input type="url" id="idea-image" name="image" required>
 
             </div>
 
             <div class="input-wrapper">
-                <label for="link">Link da Ideia</label>
-                <input type="url" name="link">
+                <label for="idea-description">Digite uma descrição para essa ideia</label>
+                <textarea id="idea-description" name="description" required cols="30" rows="10"></textarea>
+
+            </div>
+
+            <div class="input-wrapper">
+                <label for="idea-link">Link da Ideia</label>
+                <input type="url" id="idea-link" name="link" required>
 
             </div>
 
