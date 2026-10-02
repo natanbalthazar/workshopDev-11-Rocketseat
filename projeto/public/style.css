@@ -183,6 +183,9 @@ footer a{
 
     display: flex;
     justify-content: center;
+    /* Sem isso, o conteúdo estica até a altura da tela e a margem de baixo
+       não entra na rolagem (o botão Salvar ficaria colado na borda em telas baixas). */
+    align-items: flex-start;
 
     transition: 400ms;
 }
@@ -192,7 +195,9 @@ footer a{
 }
 
 #modal .content{
-    margin-top: 5%; /* Nas aulas, foi posto 15%. No entanto, adptei para minha tela */
+    /* Espaçamento vertical em px: margem em % é calculada sobre a LARGURA da tela,
+       então em telas largas e baixas o modal passava da altura e ganhava barra de rolagem à toa. */
+    margin-top: 40px;
 
     color: white;
 }
@@ -207,7 +212,7 @@ footer a{
     width: 80%;
     max-width: 800px;
 
-    margin:0 auto 15%; /* Nas aulas, foi posto 15%. No entanto, adptei para minha tela */
+    margin: 0 auto 40px;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
