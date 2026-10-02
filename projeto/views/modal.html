@@ -3,7 +3,9 @@
   - `name` de cada campo vira a chave em req.body no servidor (server.js: FIELDS).
   - `for` do label = `id` do campo: clicar no texto foca o input. Prefixo "idea-" para não
     colidir com outros ids da página (ex.: <section id="title"> em ideias.html).
-  - `required` e `type="url"`: o navegador valida antes de enviar. O servidor valida de novo.
+  - `required`, `type="url"` e `maxlength`: o navegador valida antes de enviar. O servidor valida de novo.
+  - MAX_LENGTH vem de server.js (nunjucks addGlobal): o limite fica definido em um lugar só.
+  - type="button" não envia o formulário (só roda o onclick). type="submit" envia.
 #}
 
 <div id="modal" class="hide">
@@ -15,35 +17,35 @@
 
             <div class="input-wrapper">
                 <label for="idea-title">Título da ideia</label>
-                <input type="text" id="idea-title" name="title" required>
+                <input type="text" id="idea-title" name="title" required maxlength="{{ MAX_LENGTH.title }}">
             </div>
 
             <div class="input-wrapper">
                 <label for="idea-category">Categoria</label>
-                <input type="text" id="idea-category" name="category" required>
+                <input type="text" id="idea-category" name="category" required maxlength="{{ MAX_LENGTH.category }}">
 
             </div>
 
             <div class="input-wrapper">
                 <label for="idea-image">Link da Imagem</label>
-                <input type="url" id="idea-image" name="image" required>
+                <input type="url" id="idea-image" name="image" required maxlength="{{ MAX_LENGTH.image }}">
 
             </div>
 
             <div class="input-wrapper">
                 <label for="idea-description">Digite uma descrição para essa ideia</label>
-                <textarea id="idea-description" name="description" required cols="30" rows="10"></textarea>
+                <textarea id="idea-description" name="description" required maxlength="{{ MAX_LENGTH.description }}" cols="30" rows="10"></textarea>
 
             </div>
 
             <div class="input-wrapper">
                 <label for="idea-link">Link da Ideia</label>
-                <input type="url" id="idea-link" name="link" required>
+                <input type="url" id="idea-link" name="link" required maxlength="{{ MAX_LENGTH.link }}">
 
             </div>
 
-            <a href="#" onclick="onOff()">Voltar</a>
-            <button>Salvar</button>
+            <button type="button" onclick="onOff()">Voltar</button>
+            <button type="submit">Salvar</button>
 
 
         </form>

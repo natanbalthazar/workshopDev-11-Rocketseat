@@ -12,8 +12,11 @@
         <img src="/logo.png" alt="Imagem da Logomarca">
     </a>
     <nav>
-        <li><a href="/">Início</a></li>
-        <li><a class="button" href="#" onclick="onOff()">Nova Ideia</a></li>
+        <ul>
+            <li><a href="/">Início</a></li>
+            {# <button> para ações na página; <a> só para navegar para outra URL #}
+            <li><button type="button" class="button" onclick="onOff()">Nova Ideia</button></li>
+        </ul>
     </nav>
 </header>
 <section id="title">

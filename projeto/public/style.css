@@ -105,8 +105,15 @@ button {
 
     cursor: pointer;
 
-    outline: none;
+    /* botões não herdam a fonte da página por padrão */
+    font-family: inherit;
 
+}
+
+/* Contorno só ao navegar pelo teclado (Tab); clique com mouse não mostra. */
+:focus-visible {
+    outline: 2px solid #0984e3;
+    outline-offset: 2px;
 }
 
 button:hover{
@@ -235,7 +242,8 @@ form label{
     letter-spacing: 0.8px;
 }
 
-form a{
+/* Botão "Voltar" do modal */
+form button[type="button"]{
 
     width: 150px;
     height: 40px;
@@ -257,14 +265,15 @@ form a{
     transition: 400ms;
 }
 
-form a:hover {
+form button[type="button"]:hover {
     background: #fff;
     color: #ff5e84;
 
     text-decoration: none;
 }
 
-form button{
+/* Botão "Salvar" do modal */
+form button[type="submit"]{
     background: white;
 
     width: 150px;
@@ -284,7 +293,7 @@ form button{
 
 }
 
-form button:hover{
+form button[type="submit"]:hover{
     background-color: #0984e3;
     color: white;
 
@@ -311,6 +320,15 @@ form button:hover{
     align-items: center;
 }
 
+#page-ideas nav ul {
+    display: flex;
+    align-items: center;
+
+    /* remove o espaçamento padrão da lista */
+    margin: 0;
+    padding: 0;
+}
+
 #page-ideas nav li {
     list-style-type: none;
 
@@ -321,7 +339,7 @@ form button:hover{
     color: #25282b;
 }
 
-#page-ideas nav li a.button{
+#page-ideas nav li .button{
     color: white;
 }
 

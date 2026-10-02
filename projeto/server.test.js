@@ -57,8 +57,15 @@ test("POST inválido responde 400 e não salva nada", async () => {
     assert.strictEqual((await post({ ...validIdea, title: "   " })).status, 400)
     assert.strictEqual((await post({ title: "só o título" })).status, 400)
     assert.strictEqual((await post({ ...validIdea, link: "javascript:alert(1)" })).status, 400)
+    assert.strictEqual((await post({ ...validIdea, title: "a".repeat(101) })).status, 400)
 
     assert.strictEqual(countIdeas(await getHtml("/ideias")), before)
+})
+
+test("maxlength do formulário vem do mesmo limite do servidor", async () => {
+    const home = await getHtml("/")
+    assert.ok(home.includes('name="title" required maxlength="100"'))
+    assert.strictEqual((await post({ ...validIdea, title: "a".repeat(100) })).status, 302, "no limite exato é aceito")
 })
 
 test("conteúdo do usuário é escapado (sem XSS)", async () => {

@@ -20,13 +20,25 @@ server.use(express.urlencoded({ extended: true }))
 // `noCache` relê o template a cada requisição: ótimo em desenvolvimento (edita o HTML e dá F5).
 // Em produção, rode com `NODE_ENV=production npm start` para os templates ficarem em cache.
 // O Nunjucks escapa as variáveis por padrão: `{{ idea.title }}` com "<script>" vira texto, não código.
-nunjucks.configure(path.join(__dirname, "views"), {
+const templates = nunjucks.configure(path.join(__dirname, "views"), {
     express: server,
     noCache: process.env.NODE_ENV !== "production",
 })
 
-// Ordem das colunas = ordem dos `?` no INSERT. Adicionou uma coluna? Inclua aqui e na tabela (db.js).
-const FIELDS = ["image", "title", "category", "description", "link"]
+// Tamanho máximo de cada campo. A ordem das chaves = ordem das colunas no INSERT.
+// Adicionou uma coluna? Inclua aqui e na tabela (db.js).
+const MAX_LENGTH = {
+    image: 2048, // URLs podem ser longas
+    title: 100,
+    category: 50,
+    description: 1000,
+    link: 2048,
+}
+const FIELDS = Object.keys(MAX_LENGTH)
+
+// Disponível em todos os templates: o modal usa `{{ MAX_LENGTH.title }}` no maxlength.
+// Assim o limite do navegador e o do servidor nunca ficam diferentes.
+templates.addGlobal("MAX_LENGTH", MAX_LENGTH)
 // Campos que viram `src`/`href` no HTML, por isso precisam ser URLs http(s).
 const URL_FIELDS = ["image", "link"]
 
@@ -69,6 +81,7 @@ server.get("/ideias", (req, res) => renderIdeas(res, "ideias.html"))
  * Cenários:
  * - todos os campos preenchidos e URLs http(s) -> salva e redireciona para /ideias (302)
  * - algum campo vazio ou só com espaços        -> 400, nada é salvo
+ * - algum campo maior que MAX_LENGTH            -> 400 (evita textos gigantes no banco)
  * - image/link sem http(s), ex. "javascript:alert(1)" -> 400 (esse valor viraria um link
  *   que executa JS quando clicado, um XSS)
  *
@@ -80,9 +93,10 @@ server.post("/", function(req, res) {
     const values = FIELDS.map(field => String(req.body[field] ?? "").trim())
 
     const hasEmptyField = values.some(value => !value)
+    const isTooLong = FIELDS.some((field, i) => values[i].length > MAX_LENGTH[field])
     const hasInvalidUrl = URL_FIELDS.some(field => !/^https?:\/\//i.test(values[FIELDS.indexOf(field)]))
 
-    if (hasEmptyField || hasInvalidUrl) {
+    if (hasEmptyField || isTooLong || hasInvalidUrl) {
         return res.status(400).send("Preencha todos os campos com valores válidos!")
     }
 
