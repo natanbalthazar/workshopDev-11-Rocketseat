@@ -15,9 +15,14 @@
   "author": "Natan Andrade",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
-    "nodemon": "^2.0.4",
-    "nunjucks": "^3.2.1",
-    "sqlite3": "^5.0.0"
+    "express": "^5.2.1",
+    "nunjucks": "^3.2.4",
+    "sqlite3": "^6.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "engines": {
+    "node": ">=20.17.0"
   }
 }
