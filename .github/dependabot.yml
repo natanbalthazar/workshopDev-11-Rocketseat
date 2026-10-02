@@ -1,4 +1,5 @@
 # Docs: https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+# Sem `target-branch`, os PRs vão para a branch padrão (master).
 
 version: 2
 updates:
@@ -6,4 +7,9 @@ updates:
     directory: "/projeto" # Localização do package.json
     schedule:
       interval: "weekly"
-    target-branch: "develop"
+
+  # Mantém atualizadas as actions usadas em .github/workflows/ci.yml
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"

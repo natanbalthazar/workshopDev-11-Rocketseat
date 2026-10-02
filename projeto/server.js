@@ -17,16 +17,28 @@ server.use(express.static(path.join(__dirname, "public")))
 server.use(express.urlencoded({ extended: true }))
 
 // Nunjucks: template engine que transforma views/*.html + dados em HTML final.
-// `noCache: true` relê o template a cada requisição: ótimo em desenvolvimento
-// (edita o HTML e dá F5), mas em produção com tráfego vale trocar para `false`.
+// `noCache` relê o template a cada requisição: ótimo em desenvolvimento (edita o HTML e dá F5).
+// Em produção, rode com `NODE_ENV=production npm start` para os templates ficarem em cache.
 // O Nunjucks escapa as variáveis por padrão: `{{ idea.title }}` com "<script>" vira texto, não código.
-nunjucks.configure(path.join(__dirname, "views"), {
+const templates = nunjucks.configure(path.join(__dirname, "views"), {
     express: server,
-    noCache: true,
+    noCache: process.env.NODE_ENV !== "production",
 })
 
-// Ordem das colunas = ordem dos `?` no INSERT. Adicionou uma coluna? Inclua aqui e na tabela (db.js).
-const FIELDS = ["image", "title", "category", "description", "link"]
+// Tamanho máximo de cada campo. A ordem das chaves = ordem das colunas no INSERT.
+// Adicionou uma coluna? Inclua aqui e na tabela (db.js).
+const MAX_LENGTH = {
+    image: 2048, // URLs podem ser longas
+    title: 100,
+    category: 50,
+    description: 1000,
+    link: 2048,
+}
+const FIELDS = Object.keys(MAX_LENGTH)
+
+// Disponível em todos os templates: o modal usa `{{ MAX_LENGTH.title }}` no maxlength.
+// Assim o limite do navegador e o do servidor nunca ficam diferentes.
+templates.addGlobal("MAX_LENGTH", MAX_LENGTH)
 // Campos que viram `src`/`href` no HTML, por isso precisam ser URLs http(s).
 const URL_FIELDS = ["image", "link"]
 
@@ -48,7 +60,8 @@ function renderIdeas(res, view, limit = -1) {
     db.all(`SELECT * FROM ideas ORDER BY id DESC LIMIT ?`, [limit], function(err, ideas) {
         if (err) {
             console.log(err)
-            return res.send("Erro no banco de dados!")
+            // 500 = erro no servidor. Sem o status, a resposta sairia como 200 (sucesso).
+            return res.status(500).send("Erro no banco de dados!")
         }
 
         // `{ ideas }` é atalho para `{ ideas: ideas }`; no template vira `{% for idea in ideas %}`.
@@ -68,6 +81,7 @@ server.get("/ideias", (req, res) => renderIdeas(res, "ideias.html"))
  * Cenários:
  * - todos os campos preenchidos e URLs http(s) -> salva e redireciona para /ideias (302)
  * - algum campo vazio ou só com espaços        -> 400, nada é salvo
+ * - algum campo maior que MAX_LENGTH            -> 400 (evita textos gigantes no banco)
  * - image/link sem http(s), ex. "javascript:alert(1)" -> 400 (esse valor viraria um link
  *   que executa JS quando clicado, um XSS)
  *
@@ -79,9 +93,10 @@ server.post("/", function(req, res) {
     const values = FIELDS.map(field => String(req.body[field] ?? "").trim())
 
     const hasEmptyField = values.some(value => !value)
+    const isTooLong = FIELDS.some((field, i) => values[i].length > MAX_LENGTH[field])
     const hasInvalidUrl = URL_FIELDS.some(field => !/^https?:\/\//i.test(values[FIELDS.indexOf(field)]))
 
-    if (hasEmptyField || hasInvalidUrl) {
+    if (hasEmptyField || isTooLong || hasInvalidUrl) {
         return res.status(400).send("Preencha todos os campos com valores válidos!")
     }
 
@@ -91,7 +106,7 @@ server.post("/", function(req, res) {
     db.run(query, values, function(err) {
         if (err) {
             console.log(err)
-            return res.send("Erro no banco de dados!")
+            return res.status(500).send("Erro no banco de dados!")
         }
 
         // Padrão POST -> Redirect -> GET: se a pessoa der F5 em /ideias,
@@ -102,4 +117,5 @@ server.post("/", function(req, res) {
 
 // Porta 3000 por padrão. Hospedagens (Render, Railway...) definem a variável PORT.
 // Ex.: `PORT=4000 npm start` -> http://localhost:4000
-server.listen(process.env.PORT || 3000)
+// Exportado para os testes (server.test.js), que sobem o app com PORT=0 (porta livre aleatória).
+module.exports = server.listen(process.env.PORT || 3000)

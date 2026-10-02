@@ -1,0 +1,28 @@
+# Roda os testes em todo PR e push na master. Assim os PRs do Dependabot
+# já chegam com ✅ ou ❌, sem precisar testar na mão.
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20, 22] # mínimo suportado (engines >= 20.17) e LTS atual
+    defaults:
+      run:
+        working-directory: projeto
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+          cache-dependency-path: projeto/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm audit --audit-level=high

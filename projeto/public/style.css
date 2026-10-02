@@ -105,8 +105,15 @@ button {
 
     cursor: pointer;
 
-    outline: none;
+    /* botões não herdam a fonte da página por padrão */
+    font-family: inherit;
 
+}
+
+/* Contorno só ao navegar pelo teclado (Tab); clique com mouse não mostra. */
+:focus-visible {
+    outline: 2px solid #0984e3;
+    outline-offset: 2px;
 }
 
 button:hover{
@@ -176,6 +183,9 @@ footer a{
 
     display: flex;
     justify-content: center;
+    /* Sem isso, o conteúdo estica até a altura da tela e a margem de baixo
+       não entra na rolagem (o botão Salvar ficaria colado na borda em telas baixas). */
+    align-items: flex-start;
 
     transition: 400ms;
 }
@@ -185,7 +195,9 @@ footer a{
 }
 
 #modal .content{
-    margin-top: 5%; /* Nas aulas, foi posto 15%. No entanto, adptei para minha tela */
+    /* Espaçamento vertical em px: margem em % é calculada sobre a LARGURA da tela,
+       então em telas largas e baixas o modal passava da altura e ganhava barra de rolagem à toa. */
+    margin-top: 40px;
 
     color: white;
 }
@@ -200,7 +212,7 @@ footer a{
     width: 80%;
     max-width: 800px;
 
-    margin:0 auto 15%; /* Nas aulas, foi posto 15%. No entanto, adptei para minha tela */
+    margin: 0 auto 40px;
 
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -235,7 +247,8 @@ form label{
     letter-spacing: 0.8px;
 }
 
-form a{
+/* Botão "Voltar" do modal */
+form button[type="button"]{
 
     width: 150px;
     height: 40px;
@@ -257,14 +270,15 @@ form a{
     transition: 400ms;
 }
 
-form a:hover {
+form button[type="button"]:hover {
     background: #fff;
     color: #ff5e84;
 
     text-decoration: none;
 }
 
-form button{
+/* Botão "Salvar" do modal */
+form button[type="submit"]{
     background: white;
 
     width: 150px;
@@ -284,7 +298,7 @@ form button{
 
 }
 
-form button:hover{
+form button[type="submit"]:hover{
     background-color: #0984e3;
     color: white;
 
@@ -311,6 +325,15 @@ form button:hover{
     align-items: center;
 }
 
+#page-ideas nav ul {
+    display: flex;
+    align-items: center;
+
+    /* remove o espaçamento padrão da lista */
+    margin: 0;
+    padding: 0;
+}
+
 #page-ideas nav li {
     list-style-type: none;
 
@@ -321,7 +344,7 @@ form button:hover{
     color: #25282b;
 }
 
-#page-ideas nav li a.button{
+#page-ideas nav li .button{
     color: white;
 }
 
