@@ -74,3 +74,21 @@ test("conteúdo do usuário é escapado (sem XSS)", async () => {
     assert.ok(!html.includes("<script>alert(1)</script>"))
     assert.ok(html.includes("&lt;script&gt;"))
 })
+
+test("banco novo: consultas logo ao abrir não falham com 'no such table'", () => {
+    // Processo separado para ter um banco recém-criado. Sem db.serialize() em db.js,
+    // o SELECT pode rodar antes do CREATE TABLE terminar.
+    const { execFileSync } = require("node:child_process")
+    const script = `
+        const db = require("./db")
+        let pending = 20, errors = 0
+        for (let i = 0; i < 20; i++) db.all("SELECT * FROM ideas", err => {
+            if (err) errors++
+            if (--pending === 0) { console.log(errors); db.close() }
+        })`
+    const output = execFileSync(process.execPath, ["-e", script], {
+        cwd: __dirname,
+        env: { ...process.env, DB_FILE: ":memory:" },
+    })
+    assert.strictEqual(output.toString().trim(), "0")
+})

@@ -1,20 +1,33 @@
 {
-  "name": "projeto",
+  "name": "casa-criativa",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "description": "Casa Criativa: mural para cadastrar e listar ideias de atividades. Projeto de estudo da Rocketseat com Node.js, Express, Nunjucks e SQLite.",
+  "private": true,
+  "author": "Natan Andrade",
+  "license": "MIT",
+  "homepage": "https://github.com/natanbalthazar/workshopDev-11-Rocketseat#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natanbalthazar/workshopDev-11-Rocketseat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/natanbalthazar/workshopDev-11-Rocketseat/issues"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "nunjucks",
+    "sqlite",
+    "rocketseat"
+  ],
+  "engines": {
+    "node": ">=20.17.0"
+  },
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
     "test": "node --test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/natanbalthazar/workshopDev-11-Rocketseat.git"
-  },
-  "keywords": [],
-  "author": "Natan Andrade",
-  "license": "ISC",
   "dependencies": {
     "express": "^5.2.1",
     "nunjucks": "^3.2.4",
@@ -22,8 +35,5 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
-  },
-  "engines": {
-    "node": ">=20.17.0"
   }
 }
