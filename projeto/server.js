@@ -1,8 +1,9 @@
-//Utilização do expressa para criar e configurar o Servidor
+//Utilização do express para criar e configurar o Servidor
 const express = require("express")
-const server = express()
-
+const nunjucks = require("nunjucks")
 const db = require("./db")
+
+const server = express()
 
 //Configuração de arquivos estáticos (CSS, Scripts, Imagens)
 server.use(express.static("public"))
@@ -11,70 +12,42 @@ server.use(express.static("public"))
 server.use(express.urlencoded({ extended: true }))
 
 //Configurações do Nunjucks
-const nunjucks = require("nunjucks")
 nunjucks.configure("views", {
     express: server,
     noCache: true,
 })
 
-//Criação de rotas /
-// Capturação do Pedido do Cliente para responder
-server.get("/", function(req, res){
+const FIELDS = ["image", "title", "category", "description", "link"]
+const URL_FIELDS = ["image", "link"]
 
-    db.all(`SELECT * FROM ideas`, function(err, rows){
-            if (err) {
-                console.log(err)
-                return res.send("Erro no banco de dados!")
-            }
-    
-            const reversedIdeas = [...rows].reverse()
-
-            let lastIdeias = []
-            for (let idea of reversedIdeas){
-                if(lastIdeias.length < 2){
-                    lastIdeias.push(idea)
-                }
-            }
-            return res.render("index.html", { ideas : lastIdeias })
-        })
-
-})   
-
-server.get("/ideias", function(req, res){
-
-    db.all(`SELECT * FROM ideas`, function(err, rows){
+function renderIdeas(res, view, limit = -1) {
+    db.all(`SELECT * FROM ideas ORDER BY id DESC LIMIT ?`, [limit], function(err, ideas) {
         if (err) {
             console.log(err)
             return res.send("Erro no banco de dados!")
         }
 
-        const reversedIdeas = [...rows].reverse()
-    
-        return res.render("ideias.html", { ideas: reversedIdeas})
+        return res.render(view, { ideas })
     })
+}
 
-})
+server.get("/", (req, res) => renderIdeas(res, "index.html", 2))
+
+server.get("/ideias", (req, res) => renderIdeas(res, "ideias.html"))
 
 //Inserir dados na tabela
-server.post("/", function(req, res){
-    const query = `
-        INSERT INTO ideas(
-            image,
-            title,
-            category,
-            description,
-            link
-        ) VALUES (?,?,?,?,?);
-    `
- 
-    const values = [
-        req.body.image,
-        req.body.title,
-        req.body.category,
-        req.body.description,
-        req.body.link,
-    ]
+server.post("/", function(req, res) {
+    const values = FIELDS.map(field => String(req.body[field] ?? "").trim())
 
+    const hasEmptyField = values.some(value => !value)
+    // Só aceita http(s): evita "javascript:" nos href/src renderizados
+    const hasInvalidUrl = URL_FIELDS.some(field => !/^https?:\/\//i.test(values[FIELDS.indexOf(field)]))
+
+    if (hasEmptyField || hasInvalidUrl) {
+        return res.status(400).send("Preencha todos os campos com valores válidos!")
+    }
+
+    const query = `INSERT INTO ideas(${FIELDS.join(", ")}) VALUES (?,?,?,?,?);`
 
     db.run(query, values, function(err) {
         if (err) {
@@ -86,5 +59,4 @@ server.post("/", function(req, res){
     })
 })
 
-// Ligação do Servidor na Porta 3000
-server.listen(3000)
+server.listen(process.env.PORT || 3000)
