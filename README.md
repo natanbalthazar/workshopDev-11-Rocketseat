@@ -13,7 +13,7 @@
 
 ## 💻 Projeto
 
-Aplicação realizada durante a Semana Omnistack 11 da Rocketseat. A **Casa Criativa** é uma aplicação onde as pessoas podem sugerir novas idéias de atividades que serão listadas em um quadro fácil de ser utilizado.
+Aplicação realizada durante a Semana Omnistack 11 da Rocketseat. A **Casa Criativa** é uma aplicação onde as pessoas podem sugerir novas ideias de atividades que serão listadas em um quadro fácil de ser utilizado.
 
 <div align="center">
 <img alt="Tela Principal" title="Tela Principal" src="https://user-images.githubusercontent.com/62712246/212782248-d8d9a425-80fe-43f4-b13f-00136afd1ac2.png" height="350px" />
@@ -32,9 +32,10 @@ O projeto foi desenvolvido com as seguintes tecnologias:
 ## :wrench: Instalação e uso
 ### Requisitos:
 Para que a aplicação funcione corretamente, é necessário ter os seguintes programas:
-- [Git](https://git-scm.com),
-- [Node.js](https://nodejs.org/),
-- [SQLite3](https://sqlitebrowser.org/), instalados.
+- [Git](https://git-scm.com)
+- [Node.js](https://nodejs.org/) **20.17 ou superior** (exigido pelo `sqlite3` 6)
+
+Não é preciso instalar o SQLite: o pacote `sqlite3` já vem com ele embutido. Para abrir e inspecionar o banco (`projeto/projeto.db`) visualmente, use o [DB Browser for SQLite](https://sqlitebrowser.org/) (opcional).
 
 ### Rodando a aplicação:
 ```bash
@@ -42,16 +43,41 @@ Para que a aplicação funcione corretamente, é necessário ter os seguintes pr
 git clone https://github.com/natanbalthazar/WorkshopDev-11-Rocketseat.git
 
 # Acesse a pasta da aplicação
-cd projeto/
+cd WorkshopDev-11-Rocketseat/projeto
 
 # Instale as dependências
 npm install
 
-# Rode a aplicação
+# Rode em modo desenvolvimento (reinicia sozinho ao salvar um arquivo)
 npm run dev
+
+# ou rode sem reinício automático (como em produção)
+npm start
 ```
 
-- Após rodar a aplicação, é possível acessar no seu navegador, colocando a seguinte url: ```localhost:3000```
+- Depois, acesse no navegador: `http://localhost:3000`
+- Para usar outra porta: `PORT=4000 npm start`
+
+### Estrutura do projeto
+
+```
+projeto/
+├── server.js        # servidor Express: rotas, validação e renderização
+├── db.js            # conexão SQLite e criação da tabela (com exemplos de consultas comentados)
+├── projeto.db       # banco de dados (versionado, já vem com ideias de exemplo)
+├── public/          # arquivos estáticos: CSS, JS do navegador e imagens
+└── views/           # templates Nunjucks (layout base, páginas e partes reaproveitadas)
+```
+
+### Rotas
+
+| Método | Rota      | O que faz                                                         |
+| ------ | --------- | ----------------------------------------------------------------- |
+| GET    | `/`       | Home com as 2 ideias mais recentes                                |
+| GET    | `/ideias` | Lista todas as ideias, da mais recente para a mais antiga         |
+| POST   | `/`       | Cadastra uma ideia (formulário do modal) e redireciona p/ `/ideias` |
+
+O POST responde `400` se algum campo estiver vazio ou se `image`/`link` não forem URLs `http(s)://`.
 
 ## :memo: Licença
 

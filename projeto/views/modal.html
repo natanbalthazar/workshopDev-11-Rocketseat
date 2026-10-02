@@ -1,4 +1,10 @@
-<!-- Modal -->
+{#
+  Modal "Nova Ideia": incluído em todas as páginas por layout.html, começa escondido (classe "hide").
+  - `name` de cada campo vira a chave em req.body no servidor (server.js: FIELDS).
+  - `for` do label = `id` do campo: clicar no texto foca o input. Prefixo "idea-" para não
+    colidir com outros ids da página (ex.: <section id="title"> em ideias.html).
+  - `required` e `type="url"`: o navegador valida antes de enviar. O servidor valida de novo.
+#}
 
 <div id="modal" class="hide">
     <div class="content">
