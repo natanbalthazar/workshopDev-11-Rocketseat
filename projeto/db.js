@@ -9,6 +9,11 @@ const path = require('path')
 // do repositório criaria um projeto.db novo e vazio na raiz, e as ideias "sumiriam".
 const db = new sqlite3.Database(process.env.DB_FILE || path.join(__dirname, 'projeto.db'))
 
+// Modo serializado: cada comando só começa depois que o anterior termina.
+// Sem isso o sqlite3 roda comandos em paralelo, e uma consulta feita logo ao subir o servidor
+// pode chegar antes do CREATE TABLE abaixo -> "SQLITE_ERROR: no such table: ideas".
+db.serialize()
+
 // `IF NOT EXISTS`: roda em toda inicialização sem erro e sem apagar dados.
 // Sem ele, a 2ª vez que o servidor subisse daria "table ideas already exists".
 db.run(`
