@@ -1,1 +1,18 @@
+# Dependências (recriadas com `npm install`)
 node_modules
+
+# Sistema operacional
+.DS_Store
+
+# Logs (ex.: npm-debug.log quando o npm falha)
+*.log
+
+# Variáveis de ambiente locais (PORT, DB_FILE...): podem ter dados sensíveis
+.env
+
+# Saídas de ferramentas de teste/inspeção
+coverage/
+.playwright-mcp/
+
+# Obs.: projeto.db é versionado de propósito (traz a ideia de exemplo).
+# Os testes usam banco em memória e não alteram esse arquivo.
