@@ -3,9 +3,11 @@ const sqlite3 = require('sqlite3').verbose()
 const path = require('path')
 
 // Abre o arquivo do banco (ou cria um vazio, se não existir).
+// DB_FILE permite trocar o banco; os testes usam ":memory:" (banco temporário, some ao encerrar)
+// para não gravar dados de teste no projeto.db.
 // `__dirname` é a pasta deste arquivo: sem ele, rodar `node projeto/server.js` a partir da raiz
 // do repositório criaria um projeto.db novo e vazio na raiz, e as ideias "sumiriam".
-const db = new sqlite3.Database(path.join(__dirname, 'projeto.db'))
+const db = new sqlite3.Database(process.env.DB_FILE || path.join(__dirname, 'projeto.db'))
 
 // `IF NOT EXISTS`: roda em toda inicialização sem erro e sem apagar dados.
 // Sem ele, a 2ª vez que o servidor subisse daria "table ideas already exists".

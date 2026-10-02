@@ -57,12 +57,22 @@ npm start
 
 - Depois, acesse no navegador: `http://localhost:3000`
 - Para usar outra porta: `PORT=4000 npm start`
+- Em produção, use `NODE_ENV=production npm start` (ativa o cache dos templates)
+
+### Testes
+
+```bash
+npm test
+```
+
+Sobem o servidor com um banco temporário em memória (o `projeto.db` não é alterado) e testam as rotas, o cadastro, a validação e o escape de HTML. Rodam automaticamente no GitHub Actions a cada PR.
 
 ### Estrutura do projeto
 
 ```
 projeto/
 ├── server.js        # servidor Express: rotas, validação e renderização
+├── server.test.js   # testes automatizados (npm test)
 ├── db.js            # conexão SQLite e criação da tabela (com exemplos de consultas comentados)
 ├── projeto.db       # banco de dados (versionado, já vem com ideias de exemplo)
 ├── public/          # arquivos estáticos: CSS, JS do navegador e imagens

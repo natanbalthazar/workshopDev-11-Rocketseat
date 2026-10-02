@@ -5,11 +5,12 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node --test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/natanbalthazar/WorkshopDev-11"
+    "url": "git+https://github.com/natanbalthazar/workshopDev-11-Rocketseat.git"
   },
   "keywords": [],
   "author": "Natan Andrade",
